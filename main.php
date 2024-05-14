@@ -51,25 +51,25 @@ $winPosition = [
 
 $wallet = readline("Enter amount of $ to play with: \n");
 $baseBet = readline('Enter base bet amount: ');
-$betAmount=$baseBet;
+$betAmount = $baseBet;
 
 $keepPlaying = true;
 while ($keepPlaying) {
 
-    if($wallet<=0){
-        echo "You have run out of money!".PHP_EOL;
-        echo "Thank you for playing!".PHP_EOL;
+    if ($wallet <= 0) {
+        echo "You have run out of money!" . PHP_EOL;
+        echo "Thank you for playing!" . PHP_EOL;
         $keepPlaying = false;
         break;
     }
-    if($betAmount>$wallet){
-        $inEqualSum=true;
-        while($inEqualSum){
-            echo"Bet amount cannot exceed your available money : $$wallet".PHP_EOL;
-            $baseBet=readline("Enter valid bet amount: \n");
-            $betAmount=$baseBet;
-            if($betAmount<=$wallet){
-                $inEqualSum=false;
+    if ($betAmount > $wallet) {
+        $inEqualSum = true;
+        while ($inEqualSum) {
+            echo "Bet amount cannot exceed your available money : $$wallet" . PHP_EOL;
+            $baseBet = readline("Enter valid bet amount: \n");
+            $betAmount = $baseBet;
+            if ($betAmount <= $wallet) {
+                $inEqualSum = false;
             }
         }
     }
@@ -78,20 +78,20 @@ while ($keepPlaying) {
     $column = 4;
     $elements = ["A", "K", "K", "Q", "Q", "Q", "J", "J", "J", "J", "10", "10", "10", "10", "10"];
 
-    echo 'You have $'.$wallet.' to play with'.PHP_EOL;
-    echo 'Base bet: $'.$baseBet.' | ';
-    echo 'Bet amount $'.$betAmount.PHP_EOL;
+    echo 'You have $' . $wallet . ' to play with' . PHP_EOL;
+    echo 'Base bet: $' . $baseBet . ' | ';
+    echo 'Bet amount $' . $betAmount . PHP_EOL;
     echo PHP_EOL;
     echo("1. Spin\n2. Increase bet by 1x\n3. Edit base bet\n4. Quit\n\n");
 
-    $choice =readline("Select a choice: \n");
+    $choice = readline("Select a choice: \n");
     echo PHP_EOL;
     switch ($choice) {
 
         case 1:
             $wallet -= $betAmount;
 
-            $board=[];
+            $board = [];
             for ($i = 0; $i < $row; $i++) {
                 for ($j = 0; $j < $column; $j++) {
                     $board[$i][$j] = $elements[array_rand($elements)];
@@ -121,7 +121,7 @@ while ($keepPlaying) {
                 if ((count(array_unique($lineValues)) === 1)) {
                     $matchedSymbol = $lineValues[0];
                     $matchFound[] = $matchedSymbol;
-                    echo 'You got a line!'.PHP_EOL;
+                    echo 'You got a line!' . PHP_EOL;
 
                 }
             }
@@ -136,14 +136,13 @@ while ($keepPlaying) {
                     }
                 }
             }
-            if(!count($matchFound)==0)
-            {
-                $totalPayout=0;
+            if (!count($matchFound) == 0) {
+                $totalPayout = 0;
                 foreach ($matchFound as $matchPrice) {
                     $totalPayout += $matchPrice['price'] * $betAmount;
-                    $wallet+=$totalPayout;
+                    $wallet += $totalPayout;
                 }
-                echo 'Total Payout: $'.$totalPayout.PHP_EOL;
+                echo 'Total Payout: $' . $totalPayout . PHP_EOL;
             }
             break;
 
@@ -151,10 +150,10 @@ while ($keepPlaying) {
             $betAmount = $betAmount + $baseBet;
             break;
         case 3:
-            $newBetAmount =readline('Enter new bet amount: ');
-            $baseBet=$newBetAmount;
-            $betAmount=$baseBet;
-            echo $baseBet.PHP_EOL;
+            $newBetAmount = readline('Enter new bet amount: ');
+            $baseBet = $newBetAmount;
+            $betAmount = $baseBet;
+            echo $baseBet . PHP_EOL;
 
             break;
         case 4:
@@ -162,11 +161,11 @@ while ($keepPlaying) {
             echo "Thank you for playing!" . PHP_EOL;
             break;
         case 5:
-            $betAmount=$baseBet;
+            $betAmount = $baseBet;
             echo "Bet amount is reset!";
             break;
         default:
-            echo 'Select valid choice 1-3!'.PHP_EOL;
+            echo 'Select valid choice 1-3!' . PHP_EOL;
             break;
     }
 }
